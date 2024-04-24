@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies and build 🔧
         run: |
-          pnpm ci
+          pnpm install
           pnpm run build
 
       - name: Publish package on NPM 📦
