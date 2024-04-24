@@ -1,4 +1,13 @@
-# 1.0.0 (2024-04-24)
+# [1.1.0](https://github.com/xosnrdev/tabkit/compare/v1.0.0...v1.1.0) (2024-04-24)
+
+
+### Features
+
+* fixing bugs to make tabkit even better ([8258e16](https://github.com/xosnrdev/tabkit/commit/8258e16730b54b5eaa2de817d1eaddf21c9bbd48))
+
+
+
+# [1.0.0](https://github.com/xosnrdev/tabkit/compare/cd2d6fb8f06397c5368d92e184a5c9c356c3fa40...v1.0.0) (2024-04-24)
 
 
 ### Features
