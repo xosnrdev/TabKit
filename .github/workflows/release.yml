@@ -21,7 +21,6 @@ jobs:
           github-token: ${{ env.GITHUB_TOKEN }}
           version-file: "./package.json"
           output-file: "CHANGELOG.md"
-          preset: "angular"
       - name: create release
         uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
