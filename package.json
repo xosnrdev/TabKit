@@ -1,7 +1,7 @@
 {
   "name": "@xosnrdev/tabkit",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A library for managing tab state in web applications.",
   "main": "lib/index.js",
   "module": "lib/index.mjs",

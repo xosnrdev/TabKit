@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/xosnrdev/tabkit/compare/v1.1.0...v1.2.0) (2024-04-24)
+
+
+### Features
+
+* on a mission to squashing internal bugs ([a1a5f65](https://github.com/xosnrdev/tabkit/commit/a1a5f655f41ee959d28d75eabf646f06c2522d4d))
+
+
+
 # [1.1.0](https://github.com/xosnrdev/tabkit/compare/v1.0.0...v1.1.0) (2024-04-24)
 
 
