@@ -20,8 +20,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsup-node",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "test": ""
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "repository": {
     "type": "git",
@@ -31,7 +30,8 @@
     "tab",
     "state",
     "redux",
-    "toolkit"
+    "toolkit",
+		"tabkit"
   ],
   "author": "xosnrdev",
   "license": "MIT",
