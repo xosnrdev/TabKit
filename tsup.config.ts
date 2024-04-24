@@ -6,10 +6,10 @@ export default defineConfig({
 	splitting: false,
 	sourcemap: true,
 	clean: true,
-	minify: true,
+	minify: "terser",
 	treeshake: true,
-	experimentalDts: true,
 	outDir: "lib",
 	shims: true,
 	skipNodeModulesBundle: true,
+	dts: true
 });

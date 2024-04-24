@@ -24,13 +24,13 @@ TabKit is a TypeScript library for managing tab state in web applications using 
 To install TabKit, run the following command:
 
 ```bash
-  pnpm add tabkit
+  pnpm add @xosnrdev/tabkit
 ```
 
 or
 
 ```bash
-  yarn add tabkit
+  yarn add @xosnrdev/tabkit
 ```
 
 ## Usage

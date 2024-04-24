@@ -5,7 +5,6 @@ module.exports = {
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:react-hooks/recommended",
-		"eslint-plugin-tsdoc",
 	],
 	ignorePatterns: ["lib", ".eslintrc.cjs"],
 	parser: "@typescript-eslint/parser",
@@ -15,7 +14,5 @@ module.exports = {
 			"warn",
 			{ allowConstantExport: true },
 		],
-
-		"tsdoc/syntax": "warn",
 	},
 };

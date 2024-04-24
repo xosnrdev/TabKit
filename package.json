@@ -3,8 +3,8 @@
   "private": false,
   "version": "1.0.0",
   "description": "A library for managing tab state in web applications.",
-  "main": "lib/index.cjs",
-  "module": "lib/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
   "files": [
     "lib/**/*",
@@ -13,6 +13,7 @@
   "exports": {
     ".": {
       "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
       "types": "./lib/index.d.ts"
     }
   },
@@ -51,9 +52,6 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.24.2",
-    "@microsoft/api-extractor": "^7.43.1",
-    "@microsoft/tsdoc": "^0.14.2",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.79",
@@ -65,7 +63,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "eslint-plugin-tsdoc": "^0.2.17",
+    "terser": "^5.30.4",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.10"
