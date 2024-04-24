@@ -30,6 +30,6 @@ jobs:
           pnpm run build
 
       - name: Publish package on NPM 📦
-        run: pnpm publish
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
