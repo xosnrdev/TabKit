@@ -43,7 +43,7 @@ Use the `TabProvider` component from TabKit to wrap your application and provide
 import { TabProvider } from "@xosnrdev/tabkit";
 
 const App = () => {
-  return <TabProvider>{/* Your application components */}</TabProvider>;
+	return <TabProvider>{/* Your application components */}</TabProvider>;
 };
 ```
 
@@ -53,60 +53,60 @@ Use the provided hooks to access tab state and dispatch actions:
 
 ```tsx
 import {
-  useTab,
-  useActiveTab,
-  useAppDispatch,
-  addTab,
-  removeTab,
-  setActiveTab,
+	useTab,
+	useActiveTab,
+	useAppDispatch,
+	addTab,
+	removeTab,
+	setActiveTab,
 } from "@xosnrdev/tabkit";
 
 const MyComponent = () => {
-  const tabs = useTab();
-  const activeTabId = useActiveTab();
-  const dispatch = useAppDispatch();
+	const tabs = useTab();
+	const activeTabId = useActiveTab();
+	const dispatch = useAppDispatch();
 
-  const handleAddTab = () => {
-    dispatch(
-      addTab({
-        title: "New Tab",
-        content: "This is a new tab",
-        config: {
-          closable: true,
-          persist: false,
-        },
-      })
-    );
-  };
+	const handleAddTab = () => {
+		dispatch(
+			addTab({
+				title: "New Tab",
+				content: "This is a new tab",
+				config: {
+					closable: true,
+					persist: false,
+				},
+			})
+		);
+	};
 
-  const handleRemoveTab = (tabId: string) => {
-    dispatch(removeTab(tabId));
-  };
+	const handleRemoveTab = (tabId: string) => {
+		dispatch(removeTab(tabId));
+	};
 
-  const handleSetActiveTab = (tabId: string) => {
-    dispatch(setActiveTab(tabId));
-  };
+	const handleSetActiveTab = (tabId: string) => {
+		dispatch(setActiveTab(tabId));
+	};
 
-  return (
-    <div>
-      {/* Render tabs */}
-      {Object.values(tabs).map((tab) => (
-        <div key={tab.id}>{tab.title}</div>
-      ))}
+	return (
+		<div>
+			{/* Render tabs */}
+			{Object.values(tabs).map((tab) => (
+				<div key={tab.id}>{tab.title}</div>
+			))}
 
-      {/* Render active tab content */}
-      {activeTabId && <div>{tabs[activeTabId].content}</div>}
+			{/* Render active tab content */}
+			{activeTabId && <div>{tabs[activeTabId].content}</div>}
 
-      {/* Add, remove, and set active tab */}
-      <button onClick={handleAddTab}>Add Tab</button>
-      <button onClick={() => handleRemoveTab(activeTabId)}>
-        Remove Active Tab
-      </button>
-      <button onClick={() => handleSetActiveTab("tab-id")}>
-        Set Active Tab
-      </button>
-    </div>
-  );
+			{/* Add, remove, and set active tab */}
+			<button onClick={handleAddTab}>Add Tab</button>
+			<button onClick={() => handleRemoveTab(activeTabId)}>
+				Remove Active Tab
+			</button>
+			<button onClick={() => handleSetActiveTab("tab-id")}>
+				Set Active Tab
+			</button>
+		</div>
+	);
 };
 ```
 
@@ -118,15 +118,15 @@ You can access the tab state in your components using the `useSelector` hook fro
 import { useSelector } from "react-redux";
 import { TabState } from "tabkit";
 const TabList = () => {
-  const tabState = useSelector((state) => state.tab) as TabState;
-  return (
-    <div>
-      {" "}
-      {tabState.ids.map((tabId) => (
-        <div key={tabId}>{tabState.entities[tabId].title}</div>
-      ))}{" "}
-    </div>
-  );
+	const tabState = useSelector((state) => state.tab) as TabState;
+	return (
+		<div>
+			{" "}
+			{tabState.ids.map((tabId) => (
+				<div key={tabId}>{tabState.entities[tabId].title}</div>
+			))}{" "}
+		</div>
+	);
 };
 ```
 
@@ -181,10 +181,7 @@ TabKit provides the following hooks for accessing tab state and dispatching acti
 - `useTab`: Returns an object containing all the tab entities indexed by their IDs.
 - `useActiveTab`: Returns the ID of the currently active tab, or null if no tab is active.
 - `useAppDispatch`: Returns a reference to the dispatch function from the Redux store.
-
-### Reducer
-
-- `tabReducer`: The reducer function for managing tab state. It should be included in your Redux store configuration.
+- `useAppSelector`: defines a typed version of the `useSelector` hook from React-Redux, enabling type-safe access to the Redux store's state `(RootState)` within React components.
 
 ## Contributing
 
@@ -200,4 +197,4 @@ TabKit is built with [Redux Toolkit](https://redux-toolkit.js.org/) and inspired
 
 ## Contact
 
-For questions or feedback, please contact the TabKit team at <kenzo@geniuskingsley.dev>.
+For questions or feedback, please contact the TabKit maintainer at <successxodev@gmail.com>.
