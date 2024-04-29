@@ -1,8 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { persistor, store } from "./context/store";
-import React from "react";
+import { persistor, store } from "./context/tabSlice";
 
 export interface TabProviderProps {
 	children: ReactNode;

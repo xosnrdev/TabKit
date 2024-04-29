@@ -1,6 +1,6 @@
 # TabKit
 
-TabKit is a TypeScript library for managing tab state in web applications using Redux Toolkit. It provides a set of actions, reducers, and utilities that simplify the process of adding, removing, updating, and reordering tabs in your application.
+TabKit is a React library for managing tab state in web applications. It provides a set of actions, reducers, and utilities that simplify adding, removing, updating, and reordering tabs. TabKit is built on Redux Toolkit and TypeScript.
 
 ## Features
 
@@ -15,7 +15,7 @@ TabKit is a TypeScript library for managing tab state in web applications using 
 - 🚀 Built with Redux Toolkit for efficient state management
 - 💾 Persist tab state across sessions using Redux Persist
 - 🏪 Includes a built-in Redux store and provider component
-- 🪝 Provides hooks for accessing tab state and dispatching actions
+- 🪝 Provides a context hook for accessing tab state and dispatching actions
 
 ## Getting Started
 
@@ -49,53 +49,75 @@ const App = () => {
 
 ### 2\. Dispatch Actions
 
-Use the provided hooks to access tab state and dispatch actions:
+Use the `useTabContext` hook to access tab state and dispatch actions:
 
 ```tsx
+import {FC} from "react"
 import {
-	useTab,
-	useActiveTab,
-	useAppDispatch,
-	addTab,
-	removeTab,
-	setActiveTab,
+	useTabContext,
+	TabError
 } from "@xosnrdev/tabkit";
 
-const MyComponent = () => {
-	const tabs = useTab();
-	const activeTabId = useActiveTab();
-	const dispatch = useAppDispatch();
+const TextEditor: FC = () => {
+	const {
+		addTab,
+		tabs,
+		removeTab,
+		activeTab,
+		activeTabId,
+		setActiveTab,
+		{/* and more... */}
+
+	} = useTabContext();
+
+	const [error, setError] = useState<string | null>(null);
 
 	const handleAddTab = () => {
-		dispatch(
+		try {
 			addTab({
-				title: "New Tab",
-				content: "This is a new tab",
-				config: {
-					closable: true,
-					persist: false,
-				},
-			})
-		);
+				title: `Document ${tabs.length + 1}`,
+				content: `Hello World! ${tabs.length + 1}`,
+				config: { persist: false, maxTabs: 5 },
+			});
+		} catch (error) {
+			// Using error boundary is recommended
+			if (error instanceof TabError) {
+				setError(error.message);
+			} else {
+				setError("An unknown error occurred.");
+			}
+		}
 	};
 
-	const handleRemoveTab = (tabId: string) => {
-		dispatch(removeTab(tabId));
+	const handleSetActiveTab = (id: string) => {
+		setActiveTab(id);
 	};
 
-	const handleSetActiveTab = (tabId: string) => {
-		dispatch(setActiveTab(tabId));
+	const handleRemoveTab = (id: string) => {
+		removeTab(id);
 	};
 
 	return (
 		<div>
+			<div>
 			{/* Render tabs */}
-			{Object.values(tabs).map((tab) => (
-				<div key={tab.id}>{tab.title}</div>
-			))}
+			{tabs.map((tab) => (
+					<div key={tab.id} style={{ display: 'inline-block', marginRight: '10px' }}>
+						<button onClick={() => handleSetActiveTab(tab.id)}>{tab.title}</button>
+						<button onClick={() => handleRemoveTab(tab.id)}>X</button>
+					</div>
+				)))
+			}
+			<div>
 
+		<div>
 			{/* Render active tab content */}
-			{activeTabId && <div>{tabs[activeTabId].content}</div>}
+			{activeTab && (
+				<div>
+					<textarea id="TextEditor" value={activeTab.content} onChange={handleTextChange} style={{ width: '100%', height: '200px' }} />
+				</div>
+			)}
+		</div>
 
 			{/* Add, remove, and set active tab */}
 			<button onClick={handleAddTab}>Add Tab</button>
@@ -105,26 +127,6 @@ const MyComponent = () => {
 			<button onClick={() => handleSetActiveTab("tab-id")}>
 				Set Active Tab
 			</button>
-		</div>
-	);
-};
-```
-
-### 3\. Access Tab State
-
-You can access the tab state in your components using the `useSelector` hook from React Redux:
-
-```tsx
-import { useSelector } from "react-redux";
-import { TabState } from "tabkit";
-const TabList = () => {
-	const tabState = useSelector((state) => state.tab) as TabState;
-	return (
-		<div>
-			{" "}
-			{tabState.ids.map((tabId) => (
-				<div key={tabId}>{tabState.entities[tabId].title}</div>
-			))}{" "}
 		</div>
 	);
 };
@@ -146,13 +148,13 @@ Represents the configuration options for a tab.
 
 Represents a single tab.
 
-| Property   | Type        | Description                                    |
-| ---------- | ----------- | ---------------------------------------------- |
-| `id`       | `string`    | The unique identifier for the tab.             |
-| `title`    | `string`    | The title of the tab.                          |
-| `content?` | `string`    | The content of the tab.                        |
-| `isDirty?` | `boolean`   | Indicates whether the tab has unsaved changes. |
-| `config`   | `TabConfig` | The configuration options for the tab.         |
+| Property   | Type        | Description                                        |
+| ---------- | ----------- | -------------------------------------------------- |
+| `id`       | `string`    | The unique identifier for the tab.                 |
+| `title`    | `string`    | The title of the tab.                              |
+| `content?` | `string`    | The content of the tab.                            |
+| `isDirty?` | `boolean`   | Indicates whether the tab has empty string or not. |
+| `config?`  | `TabConfig` | The configuration options for the tab.             |
 
 #### `TabState`
 
@@ -162,26 +164,23 @@ Represents the state of the tabs.
 | ------------- | ------------------------------- | ---------------------------------------------------------- |
 | `entities`    | `Readonly<Record<string, Tab>>` | An object containing tab entities indexed by their IDs.    |
 | `ids`         | `ReadonlyArray<string>`         | An array of tab IDs in the order they should be displayed. |
-| `activeTabId` | `string`                        | `null`                                                     |
+| `activeTabId` | `string`                        | ID of an active tab which is type of string or null        |
 
 ### Actions
 
-- `addTab(payload: Omit<Tab, "id">)`: Adds a new tab to the state.
+- `addTab(payload: Omit<Tab, "id" | "isDirty">)`: Adds a new tab to the state.
 - `setActiveTab(tabId: string)`: Sets the active tab to the one with the given ID.
 - `removeTab(tabId: string)`: Removes the tab with the given ID from the state.
 - `switchTab(direction: "next" | "previous")`: Switches to the next or previous tab in the order.
 - `closeAllTabs()`: Closes all tabs, removing them from the state.
 - `updateTab(payload: Partial<Tab> & { id: string })`: Updates the properties of the tab with the given ID.
-- `moveTab(payload: { id: string; newIndex: number })`: Moves the tab with the given ID to a new position in the order.
 
-### Hooks
+### Hook
 
-TabKit provides the following hooks for accessing tab state and dispatching actions:
+TabKit provides the following hook for accessing tab state and dispatching actions:
 
-- `useTab`: Returns an object containing all the tab entities indexed by their IDs.
-- `useActiveTab`: Returns the ID of the currently active tab, or null if no tab is active.
-- `useAppDispatch`: Returns a reference to the dispatch function from the Redux store.
-- `useAppSelector`: defines a typed version of the `useSelector` hook from React-Redux, enabling type-safe access to the Redux store's state `(RootState)` within React components.
+- `useTabContext`
+  is a custom React hook that provides a convenient way to interact with the tab management system in your application. It abstracts away the complexity of working with the Redux store directly and offers a simple and intuitive API for managing tabs.
 
 ## Contributing
 
