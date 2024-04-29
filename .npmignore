@@ -1,7 +1,0 @@
-.eslintrc.cjs
-.editorconfig
-tsup.config.ts
-tsconfig.json
-vite.config.ts
-pnpm-lock.yaml
-.github/
