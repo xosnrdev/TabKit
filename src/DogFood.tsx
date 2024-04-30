@@ -11,7 +11,8 @@ const TextEditor: FC = () => {
 			addTab({
 				title: `Document ${tabs.length + 1}`,
 				content: `Hello World! ${tabs.length + 1}`,
-				config: { persist: true, maxTabs: 5, reorderable:false },
+				meta: `typescript ${tabs.length + 1}`,
+				config: { maxTabs: 5, maxContentSize: 10, reorderable: true},
 			})
 
 		} catch (error) {
@@ -73,6 +74,9 @@ const TextEditor: FC = () => {
 				<div>
 					<textarea id="TextEditor" value={activeTab.content} onChange={handleTextChange} style={{ width: '100%', height: '200px' }} />
 				</div>
+			)}
+			{activeTab && (
+				<p>{activeTab.meta}</p>
 			)}
 		</div>
 	);

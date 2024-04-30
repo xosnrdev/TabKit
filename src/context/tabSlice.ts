@@ -24,7 +24,7 @@ enum TabConfigOptions {
 }
 
 type TabConfig = {
-	[key in TabConfigOptions]?: key extends TabConfigOptions.MaxTabs | TabConfigOptions.MaxContentSize ? number : boolean;
+	readonly [key in TabConfigOptions]?: key extends TabConfigOptions.MaxTabs | TabConfigOptions.MaxContentSize ? number : boolean;
 };
 
 export interface Tab {
@@ -32,6 +32,7 @@ export interface Tab {
 	readonly title: string;
 	readonly content: string;
 	readonly isDirty: boolean;
+	readonly meta?: string
 	readonly config?: TabConfig;
 }
 
@@ -104,11 +105,16 @@ const tabsSlice = createSlice({
 				throw new TabError("Invalid tab content. Content must be a string.");
 			}
 
+			if (payload.meta !== undefined && typeof payload.meta !== "string") {
+				throw new TabError("Invalid meta content. Content must be a string.");
+			}
+
 			const newTab: Tab = {
 				id: generateTabId(),
 				...payload,
 				content: payload.content.length <= maxContentSize ? payload.content : payload.content.substring(0, maxContentSize),
 				isDirty: !!payload.content,
+				meta: payload.meta,
 				config: { ...defaultConfig, ...(payload.config || {}) },
 			};
 
@@ -182,21 +188,21 @@ const tabsSlice = createSlice({
 		switchTab: (state, { payload: direction }: PayloadAction<"next" | "previous">) => {
 			const { activeTabId, entities, ids } = state;
 			const currentIndex = ids.indexOf(activeTabId || "");
-
 			if (currentIndex !== -1) {
 				const length = ids.length;
+				const increment = direction === "next" ? 1 : -1;
 				let newIndex = currentIndex;
 
-				const increment = direction === "next" ? 1 : -1;
 				// Find the next reorderable tab index
-				for (let i = 1; i < length; i++) {
-					newIndex = (currentIndex + increment * i + length) % length;
-					if (entities[ids[newIndex]]?.config?.reorderable) {
-						break;
-					}
-				}
-				// Update activeTabId if the newIndex is different
-				if (newIndex !== currentIndex) {
+				do {
+					newIndex = (newIndex + increment + length) % length;
+				} while (
+					!entities[ids[newIndex]]?.config?.reorderable &&
+					newIndex !== currentIndex
+				);
+
+				// Update activeTabId if a reorderable tab is found
+				if (entities[ids[newIndex]]?.config?.reorderable) {
 					state.activeTabId = ids[newIndex];
 				}
 			}
@@ -257,32 +263,20 @@ export const {
 const persistTabsTransform = createTransform(
 	// Transform the inbound state
 	(S: TabState, _k) => {
-		let n = 0;
 		const { entities, ids } = S;
-
-		// Count the number of tabs to be persisted
-		for (const id of ids) {
-			const tab = entities[id];
-			if (tab && tab.config?.persist) {
-				n++;
-			}
-		}
-
-		let p = 0; // Index for persisted tabs
-		const q = new Array(n); // Array to store persisted tab ids
-		const r: TabState["entities"] = {}; // Object to store persisted tab entities
+		const persistedEntities: TabState["entities"] = {};
+		const persistedIds: TabState["ids"] = [];
 
 		// Iterate over ids and store persisted tabs
 		for (const id of ids) {
 			const tab = entities[id];
 			if (tab && tab.config?.persist) {
-				q[p] = id;
-				r[id] = tab;
-				p++;
+				persistedEntities[id] = tab;
+				persistedIds.push(id);
 			}
 		}
 
-		return { ...S, entities: r, ids: q };
+		return { ...S, entities: persistedEntities, ids: persistedIds };
 	},
 	// Transform the outbound state
 	(S: TabState, _k) => S,
