@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/xosnrdev/tabkit/compare/v1.6.0...v1.7.0) (2024-05-01)
+
+
+### Features
+
+*  removal of unnecessary config, types and improvements of  TabKit. ([2eceb3d](https://github.com/xosnrdev/tabkit/commit/2eceb3d4997c9a17c256d9b736e0afbf055c2514))
+
+
+
 # [1.6.0](https://github.com/xosnrdev/tabkit/compare/v1.5.0...v1.6.0) (2024-04-29)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * on a mission to make TabKit even better for you and me ([80607de](https://github.com/xosnrdev/tabkit/commit/80607de26f69d30f3a5bd7940d8022d046556046))
-
-
-
-# [1.2.0](https://github.com/xosnrdev/tabkit/compare/v1.1.0...v1.2.0) (2024-04-24)
-
-
-### Features
-
-* on a mission to squashing internal bugs ([a1a5f65](https://github.com/xosnrdev/tabkit/commit/a1a5f655f41ee959d28d75eabf646f06c2522d4d))
 
 
 
