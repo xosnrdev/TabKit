@@ -1,4 +1,13 @@
-## [1.7.1](https://github.com/xosnrdev/tabkit/compare/v1.8.0...v1.7.1) (2024-05-01)
+## [1.7.2](https://github.com/xosnrdev/tabkit/compare/v1.7.1...v1.7.2) (2024-05-01)
+
+
+### Bug Fixes
+
+* changelog version conflict ([8d5f3bb](https://github.com/xosnrdev/tabkit/commit/8d5f3bb55573e7e92495755be67c80e1cb78918d))
+
+
+
+## [1.7.1](https://github.com/xosnrdev/tabkit/compare/v1.7.0...v1.7.1) (2024-05-01)
 
 
 ### Bug Fixes
