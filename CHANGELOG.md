@@ -6,10 +6,6 @@
 * minor type error ([fc9519e](https://github.com/xosnrdev/tabkit/commit/fc9519ee445e87c56a0dffb87a49f871ecf6ae02))
 
 
-
-# [1.8.0](https://github.com/xosnrdev/tabkit/compare/v1.7.0...v1.8.0) (2024-05-01)
-
-
 ### Features
 
 * exporting and mapping relevant types for easy type inference making tabkit better for me and you ([9239b73](https://github.com/xosnrdev/tabkit/commit/9239b7355fdab2e6c63117db0f4cc1a84606b120))
