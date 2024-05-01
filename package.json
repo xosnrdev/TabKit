@@ -1,68 +1,70 @@
 {
-  "name": "@xosnrdev/tabkit",
-  "private": false,
-  "version": "1.7.0",
-  "description": "A library for managing tab state in web applications.",
-  "main": "lib/index.cjs",
-  "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "type": "module",
-  "files": [
-    "lib/",
-    "package.json"
-  ],
-  "exports": {
-    ".": {
-      "require": "./lib/index.cjs",
-      "import": "./lib/index.js",
-      "types": "./lib/index.d.ts"
-    }
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "tsup-node",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xosnrdev/tabkit.git"
-  },
-  "keywords": [
-    "tab",
-    "state",
-    "redux",
-    "toolkit",
-    "tabkit"
-  ],
-  "author": "xosnrdev",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xosnrdev/tabkit/issues"
-  },
-  "homepage": "https://github.com/xosnrdev/tabkit#readme",
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.2.3",
-    "react-redux": "^9.1.1",
-    "redux-persist": "^6.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.12.7",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
-    "@vitejs/plugin-react": "^4.2.1",
-    "@vitejs/plugin-react-swc": "^3.6.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "terser": "^5.30.4",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10"
-  }
+	"name": "@xosnrdev/tabkit",
+	"private": false,
+	"version": "1.7.0",
+	"description": "A library for managing tab state in web applications.",
+	"main": "lib/index.cjs",
+	"module": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"type": "module",
+	"files": [
+		"lib/",
+		"package.json"
+	],
+	"exports": {
+		".": {
+			"require": "./lib/index.cjs",
+			"import": "./lib/index.js",
+			"types": "./lib/index.d.ts"
+		}
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"ci:build": "tsup-node",
+		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"preview": "vite preview"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/xosnrdev/tabkit.git"
+	},
+	"keywords": [
+		"tab",
+		"state",
+		"redux",
+		"toolkit",
+		"tabkit"
+	],
+	"author": "xosnrdev",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/xosnrdev/tabkit/issues"
+	},
+	"homepage": "https://github.com/xosnrdev/tabkit#readme",
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"dependencies": {
+		"@reduxjs/toolkit": "^2.2.3",
+		"react-redux": "^9.1.1",
+		"redux-persist": "^6.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.12.7",
+		"@types/react": "^18.2.79",
+		"@types/react-dom": "^18.2.25",
+		"@typescript-eslint/eslint-plugin": "^7.7.1",
+		"@typescript-eslint/parser": "^7.7.1",
+		"@vitejs/plugin-react": "^4.2.1",
+		"@vitejs/plugin-react-swc": "^3.6.0",
+		"eslint": "^8.57.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-refresh": "^0.4.6",
+		"terser": "^5.30.4",
+		"tsup": "^8.0.2",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.10"
+	}
 }
