@@ -80,7 +80,7 @@ const TextEditor: FC = () => {
 				config: { persist: false, maxTabs: 5 },
 			});
 		} catch (error) {
-			// Using error boundary is recommended
+			// Use of error boundary is recommended
 			if (error instanceof TabError) {
 				setError(error.message);
 			} else {
@@ -138,11 +138,12 @@ const TextEditor: FC = () => {
 
 Represents the configuration options for a tab.
 
-| Property       | Type      | Description                                               |
-| -------------- | --------- | --------------------------------------------------------- |
-| `closable?`    | `boolean` | Specifies whether the tab can be closed.                  |
-| `reorderable?` | `boolean` | Specifies whether the tab can be reordered.               |
-| `persist?`     | `boolean` | Specifies whether the tab should persist across sessions. |
+| Property         | Type      | Description                                               |
+| ---------------- | --------- | --------------------------------------------------------- |
+| `closable`       | `boolean` | Specifies whether the tab can be closed.                  |
+| `maxTabs`        | `number`  | Specifies the maximum number of tabs allowed.             |
+| `persist`        | `boolean` | Specifies whether the tab should persist across sessions. |
+| `maxContentSize` | `number`  | Specifies the maximum size of the tab content.            |
 
 #### `Tab`
 

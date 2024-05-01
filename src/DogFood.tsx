@@ -9,10 +9,10 @@ const TextEditor: FC = () => {
 	const handleAddTab = () => {
 		try {
 			addTab({
-				title: `Document ${tabs.length + 1}`,
-				content: `Hello World! ${tabs.length + 1}`,
-				meta: `typescript ${tabs.length + 1}`,
-				config: { maxTabs: 5, maxContentSize: 10, reorderable: true},
+				title: `Document ${tabs.length}`,
+				content: `Hello World! ${tabs.length}`,
+				meta: `typescript ${tabs.length}`,
+				config: { maxTabs: 2, maxContentSize: 50, persist: true },
 			})
 
 		} catch (error) {
