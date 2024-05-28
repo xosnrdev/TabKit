@@ -1,21 +1,22 @@
 # TabKit
 
-TabKit is a React library for managing tab state in web applications. It provides a set of actions, reducers, and utilities that simplify adding, removing, updating, and reordering tabs. TabKit is built on Redux Toolkit and TypeScript.
+TabKit is a stateful React SDK library for managing Tabbed applications mainly built for Text editors and can be customized.
+It provides a set of actions, reducers, and utilities that simplify adding, removing, updating, and reordering tabs.
+TabKit is built on Redux Toolkit.
 
 ## Features
 
-- 🆕 Add new tabs with unique IDs and custom configurations
-- 🎯 Set the active tab programmatically
-- ❌ Remove tabs individually or close all tabs at once
-- ↔️ Switch between tabs using "next" and "previous" actions
-- 💾 Update tab properties, such as title, content, and dirty state
-- 🔄 Reorder tabs by moving them to new positions
-- 🎛️ Customize tab behavior with configuration options
-- 🏷️ Strongly-typed interfaces for tab state and actions
-- 🚀 Built with Redux Toolkit for efficient state management
-- 💾 Persist tab state across sessions using Redux Persist
-- 🏪 Includes a built-in Redux store and provider component
-- 🪝 Provides a context hook for accessing tab state and dispatching actions
+- Add new tabs with unique IDs and custom configurations
+- Set the active tab programmatically
+- Remove tabs individually or close all tabs at once
+- Switch between tabs using "next" and "previous" actions
+- Update tab properties, such as title, content, and dirty state
+- Reorder tabs by moving them to new positions
+- Customize tab behavior with configuration options
+- Built with Redux Toolkit for efficient state management
+- Persist tab state across sessions using Redux Persist
+- Includes a built-in Redux store and provider component
+- Provides a context hook for accessing tab state and dispatching actions
 
 ## Getting Started
 
@@ -37,7 +38,9 @@ or
 
 ### 1\. Wrap your application with the TabProvider
 
-Use the `TabProvider` component from TabKit to wrap your application and provide the built-in Redux store and Redux Persist persistor to your components.
+Use the `TabProvider` component from TabKit
+to wrap your application and provide
+the built-in Redux store and Redux Persist persistor to your components.
 
 ```tsx
 import { TabProvider } from "@xosnrdev/tabkit";
@@ -52,35 +55,39 @@ const App = () => {
 Use the `useTabContext` hook to access tab state and dispatch actions:
 
 ```tsx
-import {FC} from "react"
-import {
-	useTabContext,
-	TabError
-} from "@xosnrdev/tabkit";
+import { ChangeEvent, FC, useState } from "react";
+import { useTabContext } from "@xosnrdev/TabKit";
+import { TabError } from "@xosnrdev/TabKit";
 
 const TextEditor: FC = () => {
 	const {
 		addTab,
 		tabs,
 		removeTab,
+		updateTab,
 		activeTab,
 		activeTabId,
+		closeAllTabs,
 		setActiveTab,
-		{/* and more... */}
-
+		switchTab,
 	} = useTabContext();
-
 	const [error, setError] = useState<string | null>(null);
 
 	const handleAddTab = () => {
 		try {
 			addTab({
-				title: `Document ${tabs.length + 1}`,
-				content: `Hello World! ${tabs.length + 1}`,
-				config: { persist: false, maxTabs: 5 },
+				title: `Document ${tabs.length}`,
+				content: `Hello World! ${tabs.length}`,
+				meta: `typescript ${tabs.length}`, // For additional tab properties
+				config: {
+					maxTabs: 4, // Maximum number of Tabs to allow
+					maxContentSize: 50, // Maximum number of content in words allowed
+					persist: true, // Persists state of Tab(s). default false
+					closable: true, // Mitigates closing Tab(s). default true
+				},
 			});
 		} catch (error) {
-			// Use of error boundary is recommended
+			// in a real scenario you can use error boundary
 			if (error instanceof TabError) {
 				setError(error.message);
 			} else {
@@ -89,6 +96,7 @@ const TextEditor: FC = () => {
 		}
 	};
 
+	// Utility functions
 	const handleSetActiveTab = (id: string) => {
 		setActiveTab(id);
 	};
@@ -97,39 +105,74 @@ const TextEditor: FC = () => {
 		removeTab(id);
 	};
 
+	const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const newText = e.target.value;
+		if (activeTabId) {
+			updateTab({ id: activeTabId, content: newText });
+		}
+	};
+
+	const handleSwitchTab = (direction: "next" | "previous") => {
+		switchTab(direction);
+	};
+
+	const handleCloseAllTabs = () => {
+		closeAllTabs();
+	};
+
 	return (
 		<div>
-			<div>
-			{/* Render tabs */}
-			{tabs.map((tab) => (
-					<div key={tab.id} style={{ display: 'inline-block', marginRight: '10px' }}>
-						<button onClick={() => handleSetActiveTab(tab.id)}>{tab.title}</button>
-						<button onClick={() => handleRemoveTab(tab.id)}>X</button>
-					</div>
-				)))
-			}
-			<div>
-
-		<div>
-			{/* Render active tab content */}
-			{activeTab && (
-				<div>
-					<textarea id="TextEditor" value={activeTab.content} onChange={handleTextChange} style={{ width: '100%', height: '200px' }} />
+			{error && (
+				<div
+					style={{
+						color: "red",
+						backgroundColor: "#ffcccc",
+						padding: "10px",
+						marginBottom: "10px",
+					}}
+				>
+					<p>Error: {error}</p>
 				</div>
 			)}
-		</div>
+			<div style={{ marginBottom: "10px" }}>
+				<button onClick={handleAddTab}>Add Tab</button>
+				<button onClick={() => handleSwitchTab("previous")}>
+					Previous Tab
+				</button>
+				<button onClick={() => handleSwitchTab("next")}>Next Tab</button>
+				<button onClick={handleCloseAllTabs}>Close All Tabs</button>
+			</div>
 
-			{/* Add, remove, and set active tab */}
-			<button onClick={handleAddTab}>Add Tab</button>
-			<button onClick={() => handleRemoveTab(activeTabId)}>
-				Remove Active Tab
-			</button>
-			<button onClick={() => handleSetActiveTab("tab-id")}>
-				Set Active Tab
-			</button>
+			<div style={{ marginBottom: "10px" }}>
+				{tabs.map((tab) => (
+					<div
+						key={tab.id}
+						style={{ display: "inline-block", marginRight: "10px" }}
+					>
+						<button onClick={() => handleSetActiveTab(tab.id)}>
+							{tab.title}
+						</button>
+						<button onClick={() => handleRemoveTab(tab.id)}>X</button>
+					</div>
+				))}
+			</div>
+
+			{activeTab && (
+				<div>
+					<textarea
+						id="TextEditor"
+						value={activeTab.content}
+						onChange={handleTextChange}
+						style={{ width: "100%", height: "200px" }}
+					/>
+				</div>
+			)}
+			{activeTab && <p>{activeTab.meta}</p>}
 		</div>
 	);
 };
+
+export default TextEditor;
 ```
 
 ### Interfaces

@@ -12,7 +12,7 @@ const TextEditor: FC = () => {
 				title: `Document ${tabs.length}`,
 				content: `Hello World! ${tabs.length}`,
 				meta: `typescript ${tabs.length}`,
-				config: { maxTabs: 2, maxContentSize: 50, persist: true },
+				config: { maxTabs: 10, maxContentSize: 50, persist: true, closable: false },
 			})
 
 		} catch (error) {

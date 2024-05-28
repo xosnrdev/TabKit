@@ -27,7 +27,7 @@ export class TabError extends Error {
 	 * Constructor for TabError.
 	 * @param message The error message.
 	 */
-	constructor(message: string) {
+	constructor(public readonly message: string) {
 		super(message);
 		this.name = "TabError";
 	}
@@ -129,10 +129,9 @@ const defaultConfig: TabConfig = {
 
 /**
  * Entity adapter for managing tab entities.
- * Provides efficient CRUD operations and entity management for tabs.
  */
 const tabsAdapter = createEntityAdapter<Tab>({
-	sortComparer: (a, b) => a.title.localeCompare(b.title), // Sort tabs based on their title.
+	sortComparer: (a, b) => a.title.localeCompare(b.title),
 });
 
 /**
@@ -140,9 +139,6 @@ const tabsAdapter = createEntityAdapter<Tab>({
  * Uses the initial state from the tabs adapter and sets the active tab ID to null.
  */
 const initialState = tabsAdapter.getInitialState({
-	/**
-	 * Set the active tab ID to null initially.
-	 */
 	activeTabId: null as TabId | null,
 });
 
@@ -292,27 +288,27 @@ const tabsSlice = createSlice({
 		 * @param action The action object containing the direction to switch the tab.
 		 */
 		switchTab: (state, { payload: direction }: PayloadAction<"next" | "previous">) => {
-      const { activeTabId, ids } = state;
-      const currentIndex = ids.indexOf(activeTabId || "");
+			const { activeTabId, ids } = state;
+			const currentIndex = ids.indexOf(activeTabId || "");
 
-      if (currentIndex !== -1) {
-        const length = ids.length;
-        const increment = direction === "next" ? 1 : -1;
-        const newIndex = currentIndex + increment;
+			if (currentIndex !== -1) {
+				const length = ids.length;
+				const increment = direction === "next" ? 1 : -1;
+				const newIndex = currentIndex + increment;
 
-        // Check if the new index is valid
-        if (newIndex >= 0 && newIndex < length && state.entities[ids[newIndex]]) {
-          // Update the activeTabId if a valid tab was found
-          state.activeTabId = ids[newIndex];
-        } else if (direction === "next" && currentIndex === length - 1) {
-          // If switching next and already at the last tab, do nothing
-          return;
-        } else if (direction === "previous" && currentIndex === 0) {
-          // If switching previous and already at the first tab, do nothing
-          return;
-        }
-      }
-    },
+				// Check if the new index is valid
+				// Update the activeTabId if a valid tab was found
+				// If switching next and already at the last tab, do nothing
+				// If switching previous and already at the first tab, do nothing
+				if (newIndex >= 0 && newIndex < length && state.entities[ids[newIndex]]) {
+					state.activeTabId = ids[newIndex];
+				} else if (direction === "next" && currentIndex === length - 1) {
+					return;
+				} else if (direction === "previous" && currentIndex === 0) {
+					return;
+				}
+			}
+		},
 
 		/**
 		 * Reducer for closing all tabs.
