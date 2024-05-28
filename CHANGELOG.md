@@ -1,3 +1,12 @@
+# [1.9.0](https://github.com/xosnrdev/tabkit/compare/v1.8.0...v1.9.0) (2024-05-28)
+
+
+### Features
+
+* Added eat your own food test to the sdk ([a07b2b3](https://github.com/xosnrdev/tabkit/commit/a07b2b3898c970c080e55d9fbdd2d10318a573c3))
+
+
+
 # [1.8.0](https://github.com/xosnrdev/tabkit/compare/v1.7.2...v1.8.0) (2024-05-28)
 
 
@@ -42,15 +51,6 @@
 ### Features
 
 *  removal of unnecessary config, types and improvements of  TabKit. ([2eceb3d](https://github.com/xosnrdev/tabkit/commit/2eceb3d4997c9a17c256d9b736e0afbf055c2514))
-
-
-
-# [1.6.0](https://github.com/xosnrdev/tabkit/compare/v1.5.0...v1.6.0) (2024-04-29)
-
-
-### Features
-
-* on a mission to make TabKit light weight and even better for you and me ([17d131a](https://github.com/xosnrdev/tabkit/commit/17d131a64e6d0d55bf60cd6f112c1fa45bf44858))
 
 
 
