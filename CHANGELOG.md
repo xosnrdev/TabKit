@@ -1,4 +1,13 @@
-## [1.9.1](https://github.com/xosnrdev/tabkit/compare/v1.9.0...v1.9.1) (2024-05-28)
+## [1.9.2](https://github.com/xosnrdev/tabkit/compare/v1.9.1...v1.9.2) (2024-05-28)
+
+
+### Bug Fixes
+
+* dependency cleanups ([a63ad4b](https://github.com/xosnrdev/tabkit/commit/a63ad4b80d5886d4d6f03615b48d7978734d6e7c))
+
+
+
+## [1.9.1](https://github.com/xosnrdev/tabkit/compare/v1.8.0...v1.9.1) (2024-05-28)
 
 
 ### Bug Fixes
