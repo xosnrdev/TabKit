@@ -12,5 +12,5 @@ export default defineConfig({
 	shims: true,
 	skipNodeModulesBundle: true,
 	dts: true,
-	external: ["react", "redux-persist", "react-redux", "@reduxjs/toolkit", "react-dom"]
+	external: ["react", "redux-persist", "react-redux", "@reduxjs/toolkit", "react-dom", "immer", "@xosnrdev/tabkit"]
 });
