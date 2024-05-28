@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/xosnrdev/tabkit/compare/v1.7.2...v1.8.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* removed redundancies ([b48d36b](https://github.com/xosnrdev/tabkit/commit/b48d36b99a35078807adc64b0a5bafe49433d908))
+
+
+### Features
+
+* refactoring docs ([20bd502](https://github.com/xosnrdev/tabkit/commit/20bd5024cbf93e9085822443d6aac960abe41f8f))
+* sdk cleanups ([716e33a](https://github.com/xosnrdev/tabkit/commit/716e33a06b291fc2fc21e877ad677198d9de5456))
+
+
+
 ## [1.7.2](https://github.com/xosnrdev/tabkit/compare/v1.7.1...v1.7.2) (2024-05-01)
 
 
@@ -36,15 +51,6 @@
 ### Features
 
 * on a mission to make TabKit light weight and even better for you and me ([17d131a](https://github.com/xosnrdev/tabkit/commit/17d131a64e6d0d55bf60cd6f112c1fa45bf44858))
-
-
-
-# [1.5.0](https://github.com/xosnrdev/tabkit/compare/v1.4.0...v1.5.0) (2024-04-29)
-
-
-### Features
-
-* still on a mission to make TabKit even better for you and me ([1b903df](https://github.com/xosnrdev/tabkit/commit/1b903df897558e044ed3b2d2a1bbb345c0eaf23d))
 
 
 
