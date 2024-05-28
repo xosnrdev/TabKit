@@ -33,8 +33,9 @@
     "tab",
     "state",
     "redux",
-    "toolkit",
-    "tabkit"
+    "tabkit",
+		"text editor",
+		"react sdk"
   ],
   "author": "xosnrdev",
   "license": "MIT",
