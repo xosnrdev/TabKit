@@ -8,6 +8,9 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^2.2.3
     version: 2.2.3(react-redux@9.1.1)(react@18.3.1)
+  immer:
+    specifier: ^10.1.1
+    version: 10.1.1
   react:
     specifier: ^18.2.0
     version: 18.3.1
@@ -43,9 +46,6 @@ devDependencies:
   '@vitejs/plugin-react-swc':
     specifier: ^3.6.0
     version: 3.6.0(vite@5.2.10)
-  '@xosnrdev/tabkit':
-    specifier: ^1.8.0
-    version: 1.8.0(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(redux@5.0.1)
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
@@ -860,6 +860,7 @@ packages:
       redux: 5.0.1
       redux-thunk: 3.1.0(redux@5.0.1)
       reselect: 5.1.0
+    dev: false
 
   /@rollup/rollup-android-arm-eabi@4.17.2:
     resolution: {integrity: sha512-NM0jFxY8bB8QLkoKxIQeObCaDlJKewVlIEkuyYKm5An1tdVZ966w2+MPQ2l8LBZLjR+SgyV+nRkTIunzOYBMLQ==}
@@ -1178,6 +1179,7 @@ packages:
 
   /@types/use-sync-external-store@0.0.3:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
+    dev: false
 
   /@typescript-eslint/eslint-plugin@7.8.0(@typescript-eslint/parser@7.8.0)(eslint@8.57.0)(typescript@5.4.5):
     resolution: {integrity: sha512-gFTT+ezJmkwutUPmB0skOj3GZJtlEGnlssems4AjkVweUPGj7jRwwqg0Hhg7++kPGJqKtTYx+R05Ftww372aIg==}
@@ -1340,24 +1342,6 @@ packages:
       vite: 5.2.10(@types/node@20.12.7)(terser@5.31.0)
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@xosnrdev/tabkit@1.8.0(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(redux@5.0.1):
-    resolution: {integrity: sha512-0grNoiPhcQQJXuTGmqBYEJNFJD13ML+pSD3IpcL+6/GMNlyLjC2jKQ6nrH/35oVmXXPuWFq4F5ckhRnnG5EFeQ==}
-    peerDependencies:
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      '@reduxjs/toolkit': 2.2.3(react-redux@9.1.1)(react@18.3.1)
-      immer: 10.1.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-redux: 9.1.1(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1)
-      redux-persist: 6.0.0(react@18.3.1)(redux@5.0.1)
-    transitivePeerDependencies:
-      - '@types/react'
-      - react-native
-      - redux
     dev: true
 
   /acorn-jsx@5.3.2(acorn@8.11.3):
@@ -2012,6 +1996,7 @@ packages:
 
   /immer@10.1.1:
     resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
+    dev: false
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -2176,6 +2161,7 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
 
   /lru-cache@10.2.2:
     resolution: {integrity: sha512-9hp3Vp2/hFQUiIwKo8XCeFVnrg8Pk3TYNPIR7tJADKi5YfcF7vEaK7avFHTlSy3kOKYaJQaalfEo6YuXdceBOQ==}
@@ -2413,6 +2399,7 @@ packages:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+    dev: false
 
   /react-redux@9.1.1(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1):
     resolution: {integrity: sha512-5ynfGDzxxsoV73+4czQM56qF43vsmgJsO22rmAvU5tZT2z5Xow/A2uhhxwXuGTxgdReF3zcp7A80gma2onRs1A==}
@@ -2434,6 +2421,7 @@ packages:
       react: 18.3.1
       redux: 5.0.1
       use-sync-external-store: 1.2.2(react@18.3.1)
+    dev: false
 
   /react-refresh@0.14.2:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
@@ -2445,6 +2433,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
@@ -2464,6 +2453,7 @@ packages:
     dependencies:
       react: 18.3.1
       redux: 5.0.1
+    dev: false
 
   /redux-thunk@3.1.0(redux@5.0.1):
     resolution: {integrity: sha512-NW2r5T6ksUKXCabzhL9z+h206HQw/NJkcLm1GPImRQ8IzfXwRGqjVhKJGauHirT0DAuyy6hjdnMZaRoAcy0Klw==}
@@ -2471,12 +2461,15 @@ packages:
       redux: ^5.0.0
     dependencies:
       redux: 5.0.1
+    dev: false
 
   /redux@5.0.1:
     resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
+    dev: false
 
   /reselect@5.1.0:
     resolution: {integrity: sha512-aw7jcGLDpSgNDyWBQLv2cedml85qd95/iszJjN988zX1t7AVRJi19d9kto5+W7oCfQ94gyo40dVbT6g2k4/kXg==}
+    dev: false
 
   /resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -2536,6 +2529,7 @@ packages:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -2818,6 +2812,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.3.1
+    dev: false
 
   /vite@5.2.10(@types/node@20.12.7)(terser@5.31.0):
     resolution: {integrity: sha512-PAzgUZbP7msvQvqdSD+ErD5qGnSFiGOoWmV5yAKUEI0kdhjbH6nMWVyZQC/hSc4aXwc0oJ9aEdIiF9Oje0JFCw==}
