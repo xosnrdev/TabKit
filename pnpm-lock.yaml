@@ -44,8 +44,8 @@ devDependencies:
     specifier: ^3.6.0
     version: 3.7.0(vite@5.2.12)
   '@xosnrdev/tabkit':
-    specifier: ^1.8.0
-    version: 1.8.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(redux@5.0.1)
+    specifier: ^1.9.1
+    version: 1.9.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(redux@5.0.1)
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
@@ -1329,14 +1329,13 @@ packages:
       - supports-color
     dev: true
 
-  /@xosnrdev/tabkit@1.8.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(redux@5.0.1):
-    resolution: {integrity: sha512-0grNoiPhcQQJXuTGmqBYEJNFJD13ML+pSD3IpcL+6/GMNlyLjC2jKQ6nrH/35oVmXXPuWFq4F5ckhRnnG5EFeQ==}
+  /@xosnrdev/tabkit@1.9.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(redux@5.0.1):
+    resolution: {integrity: sha512-JG6UotqoWHYRCXGYe9+Idf6A4d43+uhMYZaj1LNl1yPrwLCIqiCjwbAr9ojdZ2497Z/fHpQ4NLEjkg4a5rkwjA==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
       '@reduxjs/toolkit': 2.2.5(react-redux@9.1.2)(react@18.3.1)
-      immer: 10.1.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-redux: 9.1.2(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
