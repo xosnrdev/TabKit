@@ -9,7 +9,6 @@ TabKit is a React SDK library that simplifies the management of tabbed applicati
 - Remove tabs individually or close all tabs at once
 - Switch between tabs using "next" and "previous" actions
 - Update tab properties, such as title, content, and dirty state
-- Reorder tabs by moving them to new positions
 - Customize tab behavior with configuration options
 - Built with Redux Toolkit for efficient state management
 - Persist tab state across sessions using Redux Persist
@@ -54,8 +53,7 @@ Use the `useTabContext` hook to access tab state and dispatch actions:
 
 ```tsx
 import { ChangeEvent, FC, useState } from "react";
-import { useTabContext } from "@xosnrdev/TabKit";
-import { TabError } from "@xosnrdev/TabKit";
+import { useTabContext, TabError } from "@xosnrdev/tabkit";
 
 const TextEditor: FC = () => {
 	const {
@@ -134,22 +132,15 @@ const TextEditor: FC = () => {
 			)}
 			<div style={{ marginBottom: "10px" }}>
 				<button onClick={handleAddTab}>Add Tab</button>
-				<button onClick={() => handleSwitchTab("previous")}>
-					Previous Tab
-				</button>
+				<button onClick={() => handleSwitchTab("previous")}>Previous Tab</button>
 				<button onClick={() => handleSwitchTab("next")}>Next Tab</button>
 				<button onClick={handleCloseAllTabs}>Close All Tabs</button>
 			</div>
 
 			<div style={{ marginBottom: "10px" }}>
 				{tabs.map((tab) => (
-					<div
-						key={tab.id}
-						style={{ display: "inline-block", marginRight: "10px" }}
-					>
-						<button onClick={() => handleSetActiveTab(tab.id)}>
-							{tab.title}
-						</button>
+					<div key={tab.id} style={{ display: "inline-block", marginRight: "10px" }}>
+						<button onClick={() => handleSetActiveTab(tab.id)}>{tab.title}</button>
 						<button onClick={() => handleRemoveTab(tab.id)}>X</button>
 					</div>
 				))}
@@ -190,13 +181,13 @@ Represents the configuration options for a tab.
 
 Represents a single tab.
 
-| Property   | Type        | Description                                        |
-| ---------- | ----------- | -------------------------------------------------- |
-| `id`       | `string`    | The unique identifier for the tab.                 |
-| `title`    | `string`    | The title of the tab.                              |
-| `content?` | `string`    | The content of the tab.                            |
-| `isDirty?` | `boolean`   | Indicates whether the tab has empty string or not. |
-| `config?`  | `TabConfig` | The configuration options for the tab.             |
+| Property  | Type        | Description                                        |
+| --------- | ----------- | -------------------------------------------------- |
+| `id`      | `string`    | The unique identifier for the tab.                 |
+| `title`   | `string`    | The title of the tab.                              |
+| `content` | `string`    | The content of the tab.                            |
+| `isDirty` | `boolean`   | Indicates whether the tab has empty string or not. |
+| `config`  | `TabConfig` | The configuration options for the tab.             |
 
 #### `TabState`
 

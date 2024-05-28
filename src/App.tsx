@@ -1,4 +1,4 @@
-import TextEditor from "./dogfood";
+import TextEditor from "./DogFood.tsx";
 
 function App() {
 	return <TextEditor />
