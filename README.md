@@ -1,8 +1,6 @@
 # TabKit
 
-TabKit is a stateful React SDK library for managing Tabbed applications mainly built for Text editors and can be customized.
-It provides a set of actions, reducers, and utilities that simplify adding, removing, updating, and reordering tabs.
-TabKit is built on Redux Toolkit.
+TabKit is a React SDK library that simplifies the management of tabbed applications, particularly for text editors. It provides a set of actions, reducers, and utilities that make it easy to add, remove, update, and reorder tabs. Built on top of Redux Toolkit, TabKit offers a straightforward and efficient solution for handling tab-related state management.
 
 ## Features
 

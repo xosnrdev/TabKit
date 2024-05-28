@@ -29,7 +29,6 @@ export class TabError extends Error {
 	 */
 	constructor(public readonly message: string) {
 		super(message);
-		this.name = "TabError";
 	}
 }
 
