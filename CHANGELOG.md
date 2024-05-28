@@ -1,3 +1,12 @@
+## [1.9.1](https://github.com/xosnrdev/tabkit/compare/v1.9.0...v1.9.1) (2024-05-28)
+
+
+### Bug Fixes
+
+* dependency cleanups ([a812b2c](https://github.com/xosnrdev/tabkit/commit/a812b2cc5c7665714a5af41edd23e1de1538feb8))
+
+
+
 # [1.9.0](https://github.com/xosnrdev/tabkit/compare/v1.8.0...v1.9.0) (2024-05-28)
 
 
@@ -42,15 +51,6 @@
 ### Features
 
 * exporting and mapping relevant types for easy type inference making tabkit better for me and you ([9239b73](https://github.com/xosnrdev/tabkit/commit/9239b7355fdab2e6c63117db0f4cc1a84606b120))
-
-
-
-# [1.7.0](https://github.com/xosnrdev/tabkit/compare/v1.6.0...v1.7.0) (2024-05-01)
-
-
-### Features
-
-*  removal of unnecessary config, types and improvements of  TabKit. ([2eceb3d](https://github.com/xosnrdev/tabkit/commit/2eceb3d4997c9a17c256d9b736e0afbf055c2514))
 
 
 
