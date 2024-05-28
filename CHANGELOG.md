@@ -6,10 +6,6 @@
 * dependency cleanups ([a812b2c](https://github.com/xosnrdev/tabkit/commit/a812b2cc5c7665714a5af41edd23e1de1538feb8))
 
 
-
-# [1.9.0](https://github.com/xosnrdev/tabkit/compare/v1.8.0...v1.9.0) (2024-05-28)
-
-
 ### Features
 
 * Added eat your own food test to the sdk ([a07b2b3](https://github.com/xosnrdev/tabkit/commit/a07b2b3898c970c080e55d9fbdd2d10318a573c3))
