@@ -1,6 +1,6 @@
 # TabKit
 
-TabKit is a React SDK library that simplifies the management of tabbed applications, particularly for text editors. It provides a set of actions, reducers, and utilities that make it easy to add, remove, update, and reorder tabs. Built on top of Redux Toolkit, TabKit offers a straightforward and efficient solution for handling tab-related state management.
+TabKit is a React SDK library that simplifies the management of tabbed applications, particularly for text editors. It provides a set of actions, reducers, and utilities that make it easy to add, remove, update, and switching tabs. Built on top of Redux Toolkit, TabKit offers a straightforward and efficient solution for handling tab-related state management.
 
 ## Features
 
@@ -9,7 +9,6 @@ TabKit is a React SDK library that simplifies the management of tabbed applicati
 - Remove tabs individually or close all tabs at once
 - Switch between tabs using "next" and "previous" actions
 - Update tab properties, such as title, content, and dirty state
-- Reorder tabs by moving them to new positions
 - Customize tab behavior with configuration options
 - Built with Redux Toolkit for efficient state management
 - Persist tab state across sessions using Redux Persist
@@ -134,22 +133,15 @@ const TextEditor: FC = () => {
 			)}
 			<div style={{ marginBottom: "10px" }}>
 				<button onClick={handleAddTab}>Add Tab</button>
-				<button onClick={() => handleSwitchTab("previous")}>
-					Previous Tab
-				</button>
+				<button onClick={() => handleSwitchTab("previous")}>Previous Tab</button>
 				<button onClick={() => handleSwitchTab("next")}>Next Tab</button>
 				<button onClick={handleCloseAllTabs}>Close All Tabs</button>
 			</div>
 
 			<div style={{ marginBottom: "10px" }}>
 				{tabs.map((tab) => (
-					<div
-						key={tab.id}
-						style={{ display: "inline-block", marginRight: "10px" }}
-					>
-						<button onClick={() => handleSetActiveTab(tab.id)}>
-							{tab.title}
-						</button>
+					<div key={tab.id} style={{ display: "inline-block", marginRight: "10px" }}>
+						<button onClick={() => handleSetActiveTab(tab.id)}>{tab.title}</button>
 						<button onClick={() => handleRemoveTab(tab.id)}>X</button>
 					</div>
 				))}
@@ -194,9 +186,9 @@ Represents a single tab.
 | ---------- | ----------- | -------------------------------------------------- |
 | `id`       | `string`    | The unique identifier for the tab.                 |
 | `title`    | `string`    | The title of the tab.                              |
-| `content?` | `string`    | The content of the tab.                            |
-| `isDirty?` | `boolean`   | Indicates whether the tab has empty string or not. |
-| `config?`  | `TabConfig` | The configuration options for the tab.             |
+| `content` | `string`    | The content of the tab.                            |
+| `isDirty` | `boolean`   | Indicates whether the tab has empty string or not. |
+| `config`  | `TabConfig` | The configuration options for the tab.             |
 
 #### `TabState`
 

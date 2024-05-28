@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/// <reference types="immer" />
 
 import {
 	PayloadAction,
@@ -19,106 +18,106 @@ import {
 import storage from "redux-persist/lib/storage";
 
 /**
- * Custom error class for tab-related errors.
- * Extends the built-in Error class to provide a custom error type.
- */
+	* Custom error class for tab-related errors.
+	* Extends the built-in Error class to provide a custom error type.
+	*/
 export class TabError extends Error {
 	/**
-	 * Constructor for TabError.
-	 * @param message The error message.
-	 */
+		* Constructor for TabError.
+		* @param message The error message.
+		*/
 	constructor(public readonly message: string) {
 		super(message);
 	}
 }
 
 /**
- * Configuration options for a tab.
- * Represents the full set of configuration options available for a tab.
- */
+	* Configuration options for a tab.
+	* Represents the full set of configuration options available for a tab.
+	*/
 type TabConfigOptions = Readonly<{
 	/**
-	 * Indicates whether the tab can be closed.
-	 */
+		* Indicates whether the tab can be closed.
+		*/
 	closable: boolean;
 
 	/**
-	 * Indicates whether the tab should be persisted across app sessions.
-	 */
+		* Indicates whether the tab should be persisted across app sessions.
+		*/
 	persist: boolean;
 
 	/**
-	 * Specifies the maximum number of tabs allowed.
-	 */
+		* Specifies the maximum number of tabs allowed.
+		*/
 	maxTabs: number;
 
 	/**
-	 * Specifies the maximum size of the tab content.
-	 */
+		* Specifies the maximum size of the tab content.
+		*/
 	maxContentSize: number;
 }>;
 
 /**
- * Partial configuration options for a tab.
- * Allows for partial configuration of a tab, making all properties optional.
- */
+	* Partial configuration options for a tab.
+	* Allows for partial configuration of a tab, making all properties optional.
+	*/
 type TabConfig = Partial<TabConfigOptions>;
 
 /**
- * Represents a tab object.
- * Defines the structure and properties of a tab.
- */
+	* Represents a tab object.
+	* Defines the structure and properties of a tab.
+	*/
 export type Tab = Readonly<{
 	/**
-	 * The unique identifier of the tab.
-	 */
+		* The unique identifier of the tab.
+		*/
 	id: string;
 
 	/**
-	 * The title of the tab.
-	 */
+		* The title of the tab.
+		*/
 	title: string;
 
 	/**
-	 * The content of the tab.
-	 */
+		* The content of the tab.
+		*/
 	content: string;
 
 	/**
-	 * Indicates whether the tab content has been modified.
-	 */
+		* Indicates whether the tab content has been modified.
+		*/
 	isDirty: boolean;
 
 	/**
-	 * Optional metadata associated with the tab.
-	 */
+		* Optional metadata associated with the tab.
+		*/
 	meta?: string;
 
 	/**
-	 * The configuration options for the tab.
-	 */
+		* The configuration options for the tab.
+		*/
 	config: TabConfig;
 }>;
 
 /**
- * Type alias representing the type of the tab ID.
- */
+	* Type alias representing the type of the tab ID.
+	*/
 type TabId = Tab["id"];
 
 /**
- * Payload type for adding a new tab, excluding the ID and isDirty properties.
- */
+	* Payload type for adding a new tab, excluding the ID and isDirty properties.
+	*/
 export type AddTabPayload = Omit<Tab, "id" | "isDirty">;
 
 /**
- * Payload type for updating an existing tab, allowing partial updates and requiring the tab ID.
- */
+	* Payload type for updating an existing tab, allowing partial updates and requiring the tab ID.
+	*/
 export type UpdateTabPayload = Partial<Tab> & { id: TabId };
 
 /**
- * Default configuration options for a tab.
- * Provides sensible defaults for tab configuration options.
- */
+	* Default configuration options for a tab.
+	* Provides sensible defaults for tab configuration options.
+	*/
 const defaultConfig: TabConfig = {
 	closable: true,
 	persist: false,
@@ -127,25 +126,25 @@ const defaultConfig: TabConfig = {
 };
 
 /**
- * Entity adapter for managing tab entities.
- */
+	* Entity adapter for managing tab entities.
+	*/
 const tabsAdapter = createEntityAdapter<Tab>({
 	sortComparer: (a, b) => a.title.localeCompare(b.title),
 });
 
 /**
- * Initial state for the tabs slice of the Redux store.
- * Uses the initial state from the tabs adapter and sets the active tab ID to null.
- */
+	* Initial state for the tabs slice of the Redux store.
+	* Uses the initial state from the tabs adapter and sets the active tab ID to null.
+	*/
 const initialState = tabsAdapter.getInitialState({
 	activeTabId: null as TabId | null,
 });
 
 /**
- * Generates a unique ID for a new tab.
- * Uses the Web Crypto API to generate a secure random ID.
- * @returns A unique tab ID.
- */
+	* Generates a unique ID for a new tab.
+	* Uses the Web Crypto API to generate a secure random ID.
+	* @returns A unique tab ID.
+	*/
 function generateTabId(): string {
 	const randomBytes = new Uint8Array(8);
 	crypto.getRandomValues(randomBytes);
@@ -161,13 +160,13 @@ function generateTabId(): string {
 }
 
 /**
- * Validates the payload for adding a new tab.
- * Checks for constraints like maximum number of tabs and content size.
- * Throws a TabError if any validation fails.
- * @param payload The payload for adding a new tab.
- * @param config The configuration options for the tab.
- * @param state The current state of the tabs slice.
- */
+	* Validates the payload for adding a new tab.
+	* Checks for constraints like maximum number of tabs and content size.
+	* Throws a TabError if any validation fails.
+	* @param payload The payload for adding a new tab.
+	* @param config The configuration options for the tab.
+	* @param state The current state of the tabs slice.
+	*/
 function validatePayload(payload: AddTabPayload, config: TabConfig, state: RootState["tabs"]) {
 	const maxTabs = config.maxTabs ?? defaultConfig.maxTabs;
 	const maxContentSize = config.maxContentSize ?? defaultConfig.maxContentSize;
@@ -201,18 +200,18 @@ function validatePayload(payload: AddTabPayload, config: TabConfig, state: RootS
 }
 
 /**
- * Redux slice for managing the tabs state.
- * Defines reducers for adding, updating, removing tabs, and managing the active tab.
- */
+	* Redux slice for managing the tabs state.
+	* Defines reducers for adding, updating, removing tabs, and managing the active tab.
+	*/
 const tabsSlice = createSlice({
 	name: "tabs",
 	initialState,
 	reducers: {
 		/**
-		 * Reducer for adding a new tab.
-		 * @param state The current state of the tabs slice.
-		 * @param action The action object containing the payload for adding a new tab.
-		 */
+			* Reducer for adding a new tab.
+			* @param state The current state of the tabs slice.
+			* @param action The action object containing the payload for adding a new tab.
+			*/
 		addTab: (state, { payload }: PayloadAction<AddTabPayload>) => {
 			const { config } = payload;
 			validatePayload(payload, config, state)
@@ -231,10 +230,10 @@ const tabsSlice = createSlice({
 		},
 
 		/**
-		 * Reducer for setting the active tab.
-		 * @param state The current state of the tabs slice.
-		 * @param action The action object containing the tab ID to set as active.
-		 */
+			* Reducer for setting the active tab.
+			* @param state The current state of the tabs slice.
+			* @param action The action object containing the tab ID to set as active.
+			*/
 		setActiveTab: (state, { payload: tabId }: PayloadAction<TabId>) => {
 			if (state.entities[tabId]) {
 				state.activeTabId = tabId;
@@ -242,10 +241,10 @@ const tabsSlice = createSlice({
 		},
 
 		/**
-		 * Reducer for removing a tab.
-		 * @param state The current state of the tabs slice.
-		 * @param action The action object containing the tab ID to remove.
-		 */
+			* Reducer for removing a tab.
+			* @param state The current state of the tabs slice.
+			* @param action The action object containing the tab ID to remove.
+			*/
 		removeTab: (state, { payload: tabId }: PayloadAction<TabId>) => {
 			if (state.entities[tabId].config.closable) {
 				const { ids } = state;
@@ -282,10 +281,10 @@ const tabsSlice = createSlice({
 		},
 
 		/**
-		 * Reducer for switching to the next or previous tab.
-		 * @param state The current state of the tabs slice.
-		 * @param action The action object containing the direction to switch the tab.
-		 */
+			* Reducer for switching to the next or previous tab.
+			* @param state The current state of the tabs slice.
+			* @param action The action object containing the direction to switch the tab.
+			*/
 		switchTab: (state, { payload: direction }: PayloadAction<"next" | "previous">) => {
 			const { activeTabId, ids } = state;
 			const currentIndex = ids.indexOf(activeTabId || "");
@@ -310,19 +309,19 @@ const tabsSlice = createSlice({
 		},
 
 		/**
-		 * Reducer for closing all tabs.
-		 * @param state The current state of the tabs slice.
-		 */
+			* Reducer for closing all tabs.
+			* @param state The current state of the tabs slice.
+			*/
 		closeAllTabs: (state) => {
 			tabsAdapter.removeAll(state);
 			state.activeTabId = null;
 		},
 
 		/**
-		 * Reducer for updating a tab.
-		 * @param state The current state of the tabs slice.
-		 * @param action The action object containing the payload for updating a tab.
-		 */
+			* Reducer for updating a tab.
+			* @param state The current state of the tabs slice.
+			* @param action The action object containing the payload for updating a tab.
+			*/
 		updateTab: (state, { payload }: PayloadAction<UpdateTabPayload>) => {
 			const { id, content, config } = payload;
 			const tab = state.entities[id];
@@ -351,25 +350,25 @@ const tabsSlice = createSlice({
 });
 
 /**
- * Type definition for the root state of the Redux store.
- * Includes the tabs slice state.
- */
+	* Type definition for the root state of the Redux store.
+	* Includes the tabs slice state.
+	*/
 export type RootState = {
 	tabs: ReturnType<typeof tabsSlice.reducer>;
 };
 
 /**
- * Selectors for accessing tab-related state from the Redux store.
- * Uses the selectors generated by the tabs adapter.
- */
+	* Selectors for accessing tab-related state from the Redux store.
+	* Uses the selectors generated by the tabs adapter.
+	*/
 export const { selectAll: selectAllTabs, selectById: selectTabById } = tabsAdapter.getSelectors<RootState>(
 	(state) => state.tabs
 );
 
 /**
- * Action creators for dispatching tab-related actions.
- * Generated by the tabs slice.
- */
+	* Action creators for dispatching tab-related actions.
+	* Generated by the tabs slice.
+	*/
 export const {
 	addTab,
 	setActiveTab,
@@ -380,9 +379,9 @@ export const {
 } = tabsSlice.actions;
 
 /**
- * Redux transform for persisting only the tabs with the `persist` configuration set to `true`.
- * Allows selective persistence of tabs in the Redux store.
- */
+	* Redux transform for persisting only the tabs with the `persist` configuration set to `true`.
+	* Allows selective persistence of tabs in the Redux store.
+	*/
 const persistTabsTransform = createTransform(
 	(state: RootState["tabs"]) => {
 		const { entities, ids } = state;
@@ -404,17 +403,17 @@ const persistTabsTransform = createTransform(
 );
 
 /**
- * Root reducer combining the tabs reducer with other reducers.
- * Allows the tabs state to be managed alongside other state slices.
- */
+	* Root reducer combining the tabs reducer with other reducers.
+	* Allows the tabs state to be managed alongside other state slices.
+	*/
 const rootReducer = combineReducers({
 	tabs: tabsSlice.reducer,
 });
 
 /**
- * Configuration options for persisting the Redux store state.
- * Specifies the storage engine, whitelist of state slices to persist, and transforms.
- */
+	* Configuration options for persisting the Redux store state.
+	* Specifies the storage engine, whitelist of state slices to persist, and transforms.
+	*/
 const persistConfig: PersistConfig<RootState> = {
 	key: "root",
 	storage,
@@ -423,15 +422,15 @@ const persistConfig: PersistConfig<RootState> = {
 };
 
 /**
- * Persisted reducer created by wrapping the root reducer with persistence.
- * Allows the Redux store state to be persisted across app sessions.
- */
+	* Persisted reducer created by wrapping the root reducer with persistence.
+	* Allows the Redux store state to be persisted across app sessions.
+	*/
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 /**
- * Redux store configured with the persisted reducer and middleware.
- * Enables devtools in non-production environments.
- */
+	* Redux store configured with the persisted reducer and middleware.
+	* Enables devtools in non-production environments.
+	*/
 export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
@@ -444,20 +443,20 @@ export const store = configureStore({
 });
 
 /**
- * Type alias representing the dispatch function of the Redux store.
- */
+	* Type alias representing the dispatch function of the Redux store.
+	*/
 export type AppDispatch = typeof store.dispatch;
 
 /**
- * Custom hook for accessing the Redux store state with type safety.
- */
+	* Custom hook for accessing the Redux store state with type safety.
+	*/
 export const useAppSelector = <T>(selector: (state: RootState) => T) =>
 	useSelector<RootState, T>(selector);
 
 /**
- * Custom hook for accessing the tab-related state from the Redux store.
- * Provides convenient access to the tabs state and bound action creators.
- */
+	* Custom hook for accessing the tab-related state from the Redux store.
+	* Provides convenient access to the tabs state and bound action creators.
+	*/
 export const useTabContext = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const tabs = useAppSelector(selectAllTabs);
@@ -483,7 +482,7 @@ export const useTabContext = () => {
 };
 
 /**
- * Persistor for persisting the Redux store state.
- * Allows the store state to be persisted and rehydrated across app sessions.
- */
+	* Persistor for persisting the Redux store state.
+	* Allows the store state to be persisted and rehydrated across app sessions.
+	*/
 export const persistor = persistStore(store);

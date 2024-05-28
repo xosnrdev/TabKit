@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, useState } from 'react';
-import { useTabContext } from './index';
-import { TabError } from './index';
+import { useTabContext, TabError } from '@xosnrdev/tabkit';
 
 const TextEditor: FC = () => {
 	const { addTab, tabs, removeTab, updateTab, activeTab, activeTabId, closeAllTabs, setActiveTab, switchTab } = useTabContext()
