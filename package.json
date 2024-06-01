@@ -11,6 +11,7 @@
     "lib/",
     "package.json"
   ],
+	"packageManager": "^npm@10.8.0",
   "exports": {
     ".": {
       "require": "./lib/index.cjs",

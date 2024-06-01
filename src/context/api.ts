@@ -174,26 +174,26 @@ function validatePayload(payload: AddTabPayload, config: TabConfig, state: RootS
 	const maxContentSize = config.maxContentSize ?? defaultConfig.maxContentSize;
 	const { title, content, meta } = payload;
 
-	const errors = [];
+	const errors: string[] = [];
 
 	if (maxTabs && state.ids.length >= maxTabs) {
 		errors.push(`Maximum number of tabs (${maxTabs}) reached!`);
 	}
 
 	if (!title || typeof title !== "string") {
-		errors.push("Title payload is required and must of type string.");
+		errors.push("Title payload is required and must of type string!");
 	}
 
 	if (typeof content !== "string") {
-		errors.push("Content payload must be of type string.");
+		errors.push("Content payload must be of type string!");
 	}
 
 	if (typeof meta !== "string") {
-		errors.push("Meta payload must be of type string.");
+		errors.push("Meta payload must be of type string!");
 	}
 
 	if (maxContentSize && content.length > maxContentSize) {
-		errors.push(`Content length exceeds the limit of ${maxContentSize} characters.`);
+		errors.push(`Content length exceeds the limit of ${maxContentSize} characters!`);
 	}
 
 	if (errors.length > 0) {
@@ -289,7 +289,10 @@ const tabsSlice = createSlice({
 			*/
 		switchTab: (state, { payload: direction }: PayloadAction<"next" | "previous">) => {
 			const { activeTabId, ids } = state;
-			const currentIndex = ids.indexOf(activeTabId || "");
+
+			if (!activeTabId) return
+
+			const currentIndex = ids.indexOf(activeTabId);
 
 			if (currentIndex !== -1) {
 				const length = ids.length;
