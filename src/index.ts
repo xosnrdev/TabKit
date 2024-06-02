@@ -1,8 +1,3 @@
-export { default as TabProvider } from "./TabProvider";
-
-export {
-	TabError, addTab, closeAllTabs, persistor, removeTab, selectAllTabs,
-	selectTabById, setActiveTab, store, switchTab, updateTab, useAppSelector, useTabContext
-} from './context/api';
-export type { AddTabPayload, AppDispatch, Tab, UpdateTabPayload, RootState } from "./context/api";
-
+export { TabError, persistor, store, useTabContext } from "./context/api";
+export { Provider } from "react-redux";
+export { PersistGate } from "redux-persist/integration/react";

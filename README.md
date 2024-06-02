@@ -4,16 +4,15 @@ TabKit is a React SDK library that simplifies the management of tabbed applicati
 
 ## Features
 
-- Add new tabs with unique IDs and custom configurations
-- Set the active tab programmatically
-- Remove tabs individually or close all tabs at once
-- Switch between tabs using "next" and "previous" actions
-- Update tab properties, such as title, content, and dirty state
-- Customize tab behavior with configuration options
-- Built with Redux Toolkit for efficient state management
-- Persist tab state across sessions using Redux Persist
-- Includes a built-in Redux store and provider component
-- Provides a context hook for accessing tab state and dispatching actions
+- Add new tabs with unique IDs and custom configurations.
+- Set the active tab programmatically.
+- Remove tabs individually or close all tabs at once.
+- Switch between tabs using "next" and "previous" actions.
+- Update tab properties, such as title, content, and dirty state.
+- Customize tab behavior with configuration options.
+- Built with Redux Toolkit for efficient state management.
+- Persist tab state across sessions using Redux Persist.
+- Provides a single context hook as a single source of truth for accessing tab state and dispatching actions.
 
 ## Getting Started
 
@@ -33,18 +32,28 @@ or
 
 ## Usage
 
-### 1\. Wrap your application with the TabProvider
+### 1\. Wrap your application with the Provider
 
-Use the `TabProvider` component from TabKit
+Use the `Provider, store, persistor, PersistGate` from TabKit
 to wrap your application and provide
 the built-in Redux store and Redux Persist persistor to your components.
 
 ```tsx
-import { TabProvider } from "@xosnrdev/tabkit";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import { Provider, store, persistor, PersistGate } from "@xosnrdev/tabkit";
 
-const App = () => {
-	return <TabProvider>{/* Your application components */}</TabProvider>;
-};
+createRoot(document.getElementById("root")!).render(
+	<StrictMode>
+		<Provider store={store}>
+			<PersistGate persistor={persistor} loading={null}>
+				<App />
+			</PersistGate>
+		</Provider>
+	</StrictMode>
+);
 ```
 
 ### 2\. Dispatch Actions
@@ -132,15 +141,22 @@ const TextEditor: FC = () => {
 			)}
 			<div style={{ marginBottom: "10px" }}>
 				<button onClick={handleAddTab}>Add Tab</button>
-				<button onClick={() => handleSwitchTab("previous")}>Previous Tab</button>
+				<button onClick={() => handleSwitchTab("previous")}>
+					Previous Tab
+				</button>
 				<button onClick={() => handleSwitchTab("next")}>Next Tab</button>
 				<button onClick={handleCloseAllTabs}>Close All Tabs</button>
 			</div>
 
 			<div style={{ marginBottom: "10px" }}>
 				{tabs.map((tab) => (
-					<div key={tab.id} style={{ display: "inline-block", marginRight: "10px" }}>
-						<button onClick={() => handleSetActiveTab(tab.id)}>{tab.title}</button>
+					<div
+						key={tab.id}
+						style={{ display: "inline-block", marginRight: "10px" }}
+					>
+						<button onClick={() => handleSetActiveTab(tab.id)}>
+							{tab.title}
+						</button>
 						<button onClick={() => handleRemoveTab(tab.id)}>X</button>
 					</div>
 				))}
@@ -197,7 +213,7 @@ Represents the state of the tabs.
 | ------------- | ------------------------------- | ---------------------------------------------------------- |
 | `entities`    | `Readonly<Record<string, Tab>>` | An object containing tab entities indexed by their IDs.    |
 | `ids`         | `ReadonlyArray<string>`         | An array of tab IDs in the order they should be displayed. |
-| `activeTabId` | `string`                        | ID of an active tab which is type of string or null        |
+| `activeTabId` | `string`                        | ID of an active tab which is type of string or null.        |
 
 ### Actions
 
