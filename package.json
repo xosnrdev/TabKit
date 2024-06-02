@@ -1,7 +1,7 @@
 {
   "name": "@xosnrdev/tabkit",
   "private": false,
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "React SDK library for tab-related applications",
   "main": "lib/index.cjs",
   "module": "lib/index.js",
